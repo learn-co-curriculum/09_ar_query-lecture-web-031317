@@ -26,11 +26,11 @@ class Movie < ActiveRecord::Base
   end
 
   def self.lowest_rated
-
+    joins(:reviews).group('movies.id').order('AVG(reviews.rating) ASC').first
   end
 
   def self.most_reviewed
-
+    joins(:reviews).group('movies.id').order('COUNT(reviews.id)').first
   end
 
   def average_rating
